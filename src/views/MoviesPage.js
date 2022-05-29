@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import { useHistory, useLocation } from 'react-router';
 import { Link, useRouteMatch } from 'react-router-dom';
 import * as api from '../services/movies-api';
-import PageHeading from '../components/PageHeading/PageHeading';
 
 export default function MovieView() {
   const [query, setQuery] = useState('');
@@ -33,7 +32,6 @@ export default function MovieView() {
 
   return (
     <>
-      <PageHeading text="Movie search" />
       <form onSubmit={onSubmit}>
         <input onChange={onChange} type="text" value={query} />
         <button type="submit">Search</button>

@@ -34,7 +34,7 @@ export default function MovieDetailsPage() {
           />
           <div className="movieCard__dscr">
             <h2>{movie.title}</h2>
-            <p>User score: {(movie.vote_average * 100) / 10}%</p>
+            <p>User score: {Math.round(movie.vote_average * 10)}%</p>
             <b>Overview</b>
             <p>{movie.overview}</p>
             <b>Genres</b>
