@@ -12,3 +12,4 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     </BrowserRouter>
   </React.StrictMode>
 );
+  // "homepage": "https://12sasha12.github.io/goit-react-hw-05-movies/",

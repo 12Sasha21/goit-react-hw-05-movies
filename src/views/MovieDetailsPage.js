@@ -20,7 +20,6 @@ export default function MovieDetailsPage() {
   const [movie, setMovie] = useState(null);
   const { url, path } = useRouteMatch();
   const location = useLocation();
-  // const history = useHistory();
 
   useEffect(() => {
     api.fetchMovieById(movieId).then(setMovie);
