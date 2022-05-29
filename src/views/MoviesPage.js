@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useHistory, useLocation } from 'react-router';
 import { Link, useRouteMatch } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import * as api from '../services/movies-api';
 
 export default function MovieView() {
@@ -26,6 +27,9 @@ export default function MovieView() {
 
   const onSubmit = e => {
     e.preventDefault();
+    if (query.trim() === '') {
+      return toast.error('Введіть запит');
+    }
     api.fetchFilmsByQuery(query).then(setMovies);
     history.push({ ...history.location, search: `?query=${query}` });
   };

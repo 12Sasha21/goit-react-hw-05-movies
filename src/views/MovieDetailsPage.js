@@ -1,16 +1,27 @@
-import { useState, useEffect } from 'react';
-import { NavLink, useRouteMatch } from 'react-router-dom';
-import { useParams, Switch, useLocation } from 'react-router-dom';
-import { Route } from 'react-router-dom';
+import { useState, useEffect, lazy, Suspense } from 'react';
+import {
+  NavLink,
+  useRouteMatch,
+  useParams,
+  Switch,
+  useLocation,
+  useHistory,
+  Route,
+} from 'react-router-dom';
 import * as api from '../services/movies-api';
-import Cast from './Cast';
-import Reviews from './Reviews';
+import ButtonGoBack from '../components/ButtonGoBack/ButtonGoBack';
+// import Cast from './Cast';
+// import Reviews from './Reviews';
+
+const Cast = lazy(() => import('./Cast'));
+const Reviews = lazy(() => import('./Reviews'));
 
 export default function MovieDetailsPage() {
   const { movieId } = useParams();
   const [movie, setMovie] = useState(null);
   const { url, path } = useRouteMatch();
   const location = useLocation();
+  // const history = useHistory();
 
   useEffect(() => {
     api.fetchMovieById(movieId).then(setMovie);
@@ -18,10 +29,7 @@ export default function MovieDetailsPage() {
 
   return (
     <>
-      <button type="button">
-        <NavLink to="/">Go back</NavLink>
-      </button>
-
+      <ButtonGoBack />
       {movie && (
         <div className="movieCard">
           <img
@@ -73,15 +81,16 @@ export default function MovieDetailsPage() {
         </ul>
       </div>
       <hr />
-
-      <Switch>
-        <Route exact path={`${path}/cast`}>
-          <Cast />
-        </Route>
-        <Route exact path={`${path}/reviews`}>
-          <Reviews />
-        </Route>
-      </Switch>
+      <Suspense fallback={<h2>Loading...</h2>}>
+        <Switch>
+          <Route exact path={`${path}/cast`}>
+            <Cast />
+          </Route>
+          <Route exact path={`${path}/reviews`}>
+            <Reviews />
+          </Route>
+        </Switch>
+      </Suspense>
     </>
   );
 }
