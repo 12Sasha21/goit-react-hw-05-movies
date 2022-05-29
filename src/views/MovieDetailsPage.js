@@ -5,7 +5,6 @@ import {
   useParams,
   Switch,
   useLocation,
-  useHistory,
   Route,
 } from 'react-router-dom';
 import * as api from '../services/movies-api';
