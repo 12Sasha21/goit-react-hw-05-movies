@@ -9,8 +9,6 @@ import {
 } from 'react-router-dom';
 import * as api from '../services/movies-api';
 import ButtonGoBack from '../components/ButtonGoBack/ButtonGoBack';
-// import Cast from './Cast';
-// import Reviews from './Reviews';
 
 const Cast = lazy(() => import('./Cast'));
 const Reviews = lazy(() => import('./Reviews'));
