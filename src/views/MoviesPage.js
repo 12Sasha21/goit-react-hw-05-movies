@@ -8,9 +8,10 @@ export default function MovieView() {
   const [query, setQuery] = useState('');
   const [movies, setMovies] = useState([]);
   const { url } = useRouteMatch();
-
   const history = useHistory();
   const location = useLocation();
+
+  // console.log(location);
 
   const serchQuery = new URLSearchParams(location.search).get('query');
 
@@ -43,7 +44,14 @@ export default function MovieView() {
       <ul>
         {movies.map(movie => (
           <li key={movie.id}>
-            <Link to={`${url}/${movie.id}`}>{movie.title || movie.name}</Link>
+            <Link
+              to={{
+                pathname: `${url}/${movie.id}`,
+                state: { from: location },
+              }}
+            >
+              {movie.title || movie.name}
+            </Link>
           </li>
         ))}
       </ul>

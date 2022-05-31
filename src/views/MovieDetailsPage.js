@@ -6,6 +6,7 @@ import {
   Switch,
   useLocation,
   Route,
+  // useHistory,
 } from 'react-router-dom';
 import * as api from '../services/movies-api';
 import ButtonGoBack from '../components/ButtonGoBack/ButtonGoBack';
@@ -18,6 +19,9 @@ export default function MovieDetailsPage() {
   const [movie, setMovie] = useState(null);
   const { url, path } = useRouteMatch();
   const location = useLocation();
+  // const history = useHistory();
+
+  // console.log(location);
 
   useEffect(() => {
     api.fetchMovieById(movieId).then(setMovie);
@@ -57,7 +61,7 @@ export default function MovieDetailsPage() {
           <li>
             <NavLink
               to={{
-                pathname: url + '/cast',
+                pathname: `${url}/cast`,
                 state: { ...location.state, id: movieId },
               }}
             >
@@ -67,7 +71,7 @@ export default function MovieDetailsPage() {
           <li>
             <NavLink
               to={{
-                pathname: url + '/reviews',
+                pathname: `${url}/reviews`,
                 state: { ...location.state, id: movieId },
               }}
             >

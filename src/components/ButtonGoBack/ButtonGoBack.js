@@ -4,12 +4,12 @@ export default function ButtonGoBack() {
   const history = useHistory();
   const location = useLocation();
 
-  const goBackHandler = () => {
+  const handleGoBack = () => {
     history.push(location?.state?.from ?? '/');
   };
 
   return (
-    <button type="button" onClick={goBackHandler}>
+    <button type="button" onClick={handleGoBack}>
       Go back
     </button>
   );
