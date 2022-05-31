@@ -1,17 +1,14 @@
 import { useState, useEffect } from 'react';
 import { useHistory, useLocation } from 'react-router';
-import { Link, useRouteMatch } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import * as api from '../services/movies-api';
+import MovieList from '../components/MovieList/MovieList';
 
 export default function MovieView() {
   const [query, setQuery] = useState('');
-  const [movies, setMovies] = useState([]);
-  const { url } = useRouteMatch();
+  const [movies, setMovies] = useState(null);
   const history = useHistory();
   const location = useLocation();
-
-  // console.log(location);
 
   const serchQuery = new URLSearchParams(location.search).get('query');
 
@@ -41,20 +38,7 @@ export default function MovieView() {
         <input onChange={onChange} type="text" value={query} />
         <button type="submit">Search</button>
       </form>
-      <ul>
-        {movies.map(movie => (
-          <li key={movie.id}>
-            <Link
-              to={{
-                pathname: `${url}/${movie.id}`,
-                state: { from: location },
-              }}
-            >
-              {movie.title || movie.name}
-            </Link>
-          </li>
-        ))}
-      </ul>
+      {movies && <MovieList movies={movies} />}
     </>
   );
 }
